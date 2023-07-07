@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
+
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState();
 
@@ -21,9 +22,11 @@ export default function Home() {
       if (response.status !== 200) {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
+      let str = data.result.replace("#出力文の例:", "");
+      //もし最初に#出力文の例:があれば削除する
 
-      setResult(data.result);
-      setAnimalInput("");
+      setResult(str + "あなたに神のご加護があらんことを");
+      // setAnimalInput("");
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error);
@@ -35,21 +38,21 @@ export default function Home() {
     <div>
       <Head>
         <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <link rel="icon" href="/kirisuto.png" />
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <img src="/kirisuto.png" className={styles.icon} />
+        <h3>懺悔の部屋</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
             name="animal"
-            placeholder="Enter an animal"
+            placeholder="懺悔をしてください"
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="懺悔する" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>
